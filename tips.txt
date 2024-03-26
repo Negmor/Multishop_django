@@ -1,0 +1,16 @@
+v_139=relation between products items comments
+v_141=customize django user https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#a-full-example
+USERNAME_FIELD that filed is unique and use it for login
+v_142=code taeid
+v-146 = https://docs.djangoproject.com/en/5.0/ref/forms/validation/
+v_147=validation error:slug field
+for slug we don't need validator but for char filed we need it
+import -->from django.core import validators
+FOR CHANGE LANGUAGE OF PROJECT YOU MUST CHANGE LANGUAGE CODE IN SETTING SECTION  "fa_ir"
+https://www.geeksforgeeks.org/python-form-validation-using-django/
+v_148=validation error for form totally
+{% for error in form.non_field_errors%} in html for show it
+also you can write custom validator
+v_149=sms for rejister
+v_150=rejister with number,senario
+v_151=rejister with number (  code )
