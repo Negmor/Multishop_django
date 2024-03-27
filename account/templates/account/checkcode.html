@@ -18,24 +18,23 @@
 
     <!-- Contact Start -->
     <div class="container-fluid">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Rejister</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">check code</span></h2>
         <div class="row px-xl-5">
             <div class="col-lg-7 mb-5">
                 <div class="contact-form bg-light p-30">
                     <div id="success"></div>
-                    {% for error in form.phone.errors %}
-                                <p class="alert-danger">{{error}}</pcl>
-                     {% endfor %}
+
                 {% for error in form.non_field_errors%}
                                 <p class="alert-danger">{{error}}</pcl>
                      {% endfor %}
 
+                          <p class="alert-danger"> {{ massage }} </pcl>
                     <form method="post">
                         {% csrf_token %}
 
                          <div class="control-group">
-                        <p> phone: </p>
-                            {{form.phone}}
+
+                            {{form}}
                             <p class="help-block text-danger"></p>
                         </div>
 

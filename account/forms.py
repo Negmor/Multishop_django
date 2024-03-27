@@ -31,3 +31,11 @@ class ContactForm(forms.Form):
         # Always return a value to use as the new cleaned data, even if
         # this method didn't change it.
         return data
+
+
+class RegisterForm(forms.Form):
+    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+
+class CheckOtpForm(forms.Form):
+    code = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))

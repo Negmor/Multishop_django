@@ -14,3 +14,5 @@ also you can write custom validator
 v_149=sms for rejister
 v_150=rejister with number,senario
 v_151=rejister with number (  code )
+v_152=rejister with number (  code ) --> import tip return redirect(reverse("account:user_checkcode")+ f'?phone={cd["phone"]}')
+
