@@ -16,3 +16,4 @@ v_150=rejister with number,senario
 v_151=rejister with number (  code )
 v_152=rejister with number (  code ) --> import tip return redirect(reverse("account:user_checkcode")+ f'?phone={cd["phone"]}')
 v_153=user hide phone rejister with ####uniqe token###
+v_154=user hide phone rejister (uuid random token with time)( if user existed use User.objects.get_or_create)

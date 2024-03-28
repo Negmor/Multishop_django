@@ -3,7 +3,7 @@ from django.views import View
 from .forms import LoginForm, RegisterForm,CheckOtpForm
 from django.contrib.auth import authenticate, login
 from random import randint
-
+from uuid import uuid4
 # Create your views here.
 from .models import Otp,User
 from django.utils.crypto import   get_random_string
@@ -40,7 +40,7 @@ class UserRegister(View):
             cd = form.cleaned_data
             randcode=randint(1000,9999)
             print(randcode)
-            token=get_random_string(length=100)
+            token=str(uuid4())
             #you must send sms here
             """"sms.varificatio0n{
                 cd["phone"]
@@ -68,9 +68,10 @@ class CheckOtp(View):
             print(cd)
             if Otp.objects.filter(randcode=cd["code"],token=token ).exists():
                 otp=Otp.objects.get(token=token)
-                user = User.objects.create_user(phone=otp.phone)
+                user, is_created = User.objects.get_or_create(phone=otp.phone)
                 print(user)
                 login(request, user)
+                otp.delete()
                 return redirect("/")
             else:
 
