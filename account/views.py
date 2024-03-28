@@ -3,10 +3,10 @@ from django.views import View
 from .forms import LoginForm, RegisterForm,CheckOtpForm
 from django.contrib.auth import authenticate, login
 from random import randint
-from django.contrib.auth.models import User
-# Create your views here.
-from .models import Otp
 
+# Create your views here.
+from .models import Otp,User
+from django.utils.crypto import   get_random_string
 
 class UserLogin(View):
     def get(self, request):
@@ -40,12 +40,13 @@ class UserRegister(View):
             cd = form.cleaned_data
             randcode=randint(1000,9999)
             print(randcode)
+            token=get_random_string(length=100)
             #you must send sms here
             """"sms.varificatio0n{
                 cd["phone"]
             }"""
-            Otp.objects.create(phone= cd["phone"],randcode=randcode)
-            return redirect(reverse("account:user_checkcode")+ f'?phone={cd["phone"]}')
+            Otp.objects.create(phone= cd["phone"],randcode=randcode,token=token)
+            return redirect(reverse("account:user_checkcode")+ f'?token={token}')
 
         else:
 
@@ -59,16 +60,18 @@ class CheckOtp(View):
         return render(request, "account/checkcode.html", {"form": form})
 
     def post(self, request):
-        phone=request.GET.get("phone")
+        token = request.GET.get("token")
         form = CheckOtpForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             print("______")
             print(cd)
-            if Otp.objects.filter(randcode=cd["code"],phone=phone).exists():
-                user = User.objects.creat_user(phone=phone)
+            if Otp.objects.filter(randcode=cd["code"],token=token ).exists():
+                otp=Otp.objects.get(token=token)
+                user = User.objects.create_user(phone=otp.phone)
+                print(user)
                 login(request, user)
-                redirect("/")
+                return redirect("/")
             else:
 
                 return render(request, "account/checkcode.html", {"form": form,"massage":"user not found"})
