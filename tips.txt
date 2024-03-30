@@ -18,3 +18,4 @@ v_152=rejister with number (  code ) --> import tip return redirect(reverse("acc
 v_153=user hide phone rejister with ####uniqe token###
 v_154=user hide phone rejister (uuid random token with time)( if user existed use User.objects.get_or_create)
 v_155=information about Meta class
+v_156=
