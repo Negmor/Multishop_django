@@ -23,7 +23,7 @@
             <div class="col-lg-7 mb-5">
                 <div class="contact-form bg-light p-30">
                     <div id="success"></div>
-                    {% for error in form.phone.errors %}
+                    {% for error in form.username.errors %}
                                 <p class="alert-danger">{{error}}</pcl>
                      {% endfor %}
                 {% for error in form.non_field_errors%}
@@ -35,7 +35,7 @@
 
                          <div class="control-group">
                         <p> phone: </p>
-                            {{form.phone}}
+                            {{form.username}}
                             <p class="help-block text-danger"></p>
                         </div>
 

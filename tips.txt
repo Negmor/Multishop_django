@@ -20,3 +20,4 @@ v_154=user hide phone rejister (uuid random token with time)( if user existed us
 v_155=information about Meta class
 v_156=email rejister ""https://docs.djangoproject.com/en/5.0/topics/auth/customizing/""
 login with phone and email at the same time
+v_157=user backend for login and rejister , validation error for phone otp

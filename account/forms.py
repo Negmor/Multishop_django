@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 class LoginForm(forms.Form):
     # slug=forms.slug()
-    phone = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     """phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}),
                                validators=[validators.MaxValueValidator(11, 'Way over %(limit_value)s.')])"""
 
@@ -33,9 +33,17 @@ class ContactForm(forms.Form):
         return data
 
 
-class RegisterForm(forms.Form):
-    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"})),
 
+
+class OtpLoginForm(forms.Form):
+    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+    def clean(self):
+        cd = super().clean()
+        phone= str(cd["phone"])
+        print(len(phone))
+        if len(phone) < 9:
+            raise ValidationError('phone is short ')
 
 
 class CheckOtpForm(forms.Form):
