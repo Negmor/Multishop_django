@@ -5,17 +5,17 @@ from django.core.exceptions import ValidationError
 
 class LoginForm(forms.Form):
     # slug=forms.slug()
-    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}),
-                               validators=[validators.MaxValueValidator(11)])
+    phone = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     """phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}),
                                validators=[validators.MaxValueValidator(11, 'Way over %(limit_value)s.')])"""
+
     Password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
     # this validation show with error loop in html
     def clean(self):
         cd = super().clean()
         passw = cd["Password"]
-        if len(passw) < 8:
+        if len(passw) < 4:
             raise ValidationError('Password is short ')
 
 
@@ -34,7 +34,8 @@ class ContactForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
-    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"})),
+
 
 
 class CheckOtpForm(forms.Form):

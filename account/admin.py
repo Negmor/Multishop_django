@@ -64,6 +64,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = [
         (None, {"fields": ["phone", "password"]}),
         ("Personal info", {"fields": ["fullname"]}),
+        ("Personal info", {"fields": ["email"]}),
         ("Permissions", {"fields": ["is_admin"]}),
     ]
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
