@@ -21,3 +21,6 @@ v_155=information about Meta class
 v_156=email rejister ""https://docs.djangoproject.com/en/5.0/topics/auth/customizing/""
 login with phone and email at the same time
 v_157=user backend for login and rejister , validation error for phone otp
+v_158=fix deatial
+v_160= manage products
+v_161= manage products
