@@ -24,3 +24,4 @@ v_157=user backend for login and rejister , validation error for phone otp
 v_158=fix deatial
 v_160= manage products
 v_161= manage products
+v-162=manage products details
