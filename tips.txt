@@ -25,3 +25,4 @@ v_158=fix deatial
 v_160= manage products
 v_161= manage products
 v-162=manage products details
+v-163=manage products details
