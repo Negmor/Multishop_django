@@ -28,4 +28,5 @@ v-162=manage products details
 v-163=manage products details
 v-164=session add product to basket without register ___>inspect ___ application , session id
 v-165=cart
-v-166=
+v-166=cart_addd product
+v_167=cart_add product _ request
