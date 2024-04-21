@@ -1,7 +1,7 @@
+from product.models import Product
 
+CART_SESSION_ID = "cart"
 
-
-CART_SESSION_ID="cart"
 
 class Cart:
     def __init__(self, request):
@@ -11,27 +11,22 @@ class Cart:
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
 
-    def uniqe_id_generator(self, id, size, color):
+    def uniqe_id_generator(self, id, color, size):
         resualt = f"{id}+{color}+{size}"
         return resualt
 
-    def add(self, proudct ,size , color , quantity):
-        uniqe = self.uniqe_id_generator(proudct.id,size,color)
-        if uniqe not in self.cart:
-            self.cart[uniqe] = {'quantity': 0, 'price': str(proudct.price),"color": color ,"size":size, "id":proudct.id}
-        self.cart[uniqe]['quantity'] += quantity
-        self.session.modified = True
-        self.save()
-
-
-    """def __iter__(self):
-        variant_ids = self.cart.keys()
-        products = Variants.objects.filter(id__in=variant_ids)
+    def __iter__(self):
         cart = self.cart.copy()
-        for product in products:
-            cart[str(variant.id)]['variant'] = variant"""
+        for iteam in cart.values():
+            iteam["product"] = Product.objects.get(id=int(iteam["id"]))
+            iteam["total"] = int(iteam['quantity']) * int(iteam['price'])
+            yield iteam
 
-
-
-
-
+    def add(self, product, size, color, quantity):
+        print(product.price)
+        uniqe = self.uniqe_id_generator(product.id, color, size)
+        if uniqe not in self.cart:
+            self.cart[uniqe] = {'quantity': 0, 'price': str(product.price), "color": color, "size": size,
+                                "id": str(product.id)}
+        self.cart[uniqe]['quantity'] += int(quantity)
+        self.session.modified = True
