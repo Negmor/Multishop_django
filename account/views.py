@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import View
-from .forms import LoginForm, OtpLoginForm, CheckOtpForm
+from .forms import LoginForm, OtpLoginForm, CheckOtpForm, AddressCreationForm
 from django.contrib.auth import authenticate, login
 from random import randint
 from uuid import uuid4
@@ -74,9 +74,9 @@ class CheckOtp(View):
             if Otp.objects.filter(randcode=cd["code"], token=token).exists():
                 otp = Otp.objects.get(token=token)
                 user, is_created = User.objects.get_or_create(phone=otp.phone)
-               # user.backend="django.contrib.auth.backends.ModelBackend"
+                # user.backend="django.contrib.auth.backends.ModelBackend"
                 print(user)
-                login(request, user , backend="django.contrib.auth.backends.ModelBackend")
+                login(request, user, backend="django.contrib.auth.backends.ModelBackend")
                 otp.delete()
                 return redirect("/")
             else:
@@ -86,3 +86,15 @@ class CheckOtp(View):
         else:
 
             return render(request, "account/checkcode.html", {"form": form})
+
+
+class AaaAddressView(View):
+    def post(self, request):
+        form = AddressCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "account/add_address.html", {"form": form})
+
+    def get(self, request):
+        form = AddressCreationForm()
+        return render(request, "account/add_address.html", {"form": form})

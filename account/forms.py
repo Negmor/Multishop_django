@@ -2,6 +2,8 @@ from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
 
+from account.models import Address
+
 
 class LoginForm(forms.Form):
     # slug=forms.slug()
@@ -48,3 +50,9 @@ class OtpLoginForm(forms.Form):
 
 class CheckOtpForm(forms.Form):
     code = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+
+class AddressCreationForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        exclude = ('user',)

@@ -7,5 +7,5 @@ urlpatterns=[
 
     path("login",views.UserLogin.as_view(),name="user_login"),
     path("register",views.OtpLoginView.as_view(),name="user_rejister"),
-    path("checkcode",views.CheckOtp.as_view(),name="user_checkcode"),
+    path("add/address",views.AaaAddressView.as_view(),name="add_address"),
 ]
