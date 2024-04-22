@@ -19,3 +19,10 @@ class CartAddView(View):
         cart = Cart(request)
         cart.add(product, size, color, quantity)
         return redirect("cart:cart_detail")
+
+
+class CartDeleteView(View):
+    def get(self, request, id):
+        cart = Cart(request)
+        cart.delete(id)
+        return redirect("cart:cart_detail")

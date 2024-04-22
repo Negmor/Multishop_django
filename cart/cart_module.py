@@ -18,8 +18,10 @@ class Cart:
     def __iter__(self):
         cart = self.cart.copy()
         for iteam in cart.values():
-            iteam["product"] = Product.objects.get(id=int(iteam["id"]))
+            product=Product.objects.get(id=int(iteam["id"]))
+            iteam["product"] = product
             iteam["total"] = int(iteam['quantity']) * int(iteam['price'])
+            iteam["unique_id"] =self.uniqe_id_generator(product.id,iteam["color"],iteam["size"])
             yield iteam
 
     def add(self, product, size, color, quantity):
@@ -30,3 +32,9 @@ class Cart:
                                 "id": str(product.id)}
         self.cart[uniqe]['quantity'] += int(quantity)
         self.session.modified = True
+
+    def delete(self,id):
+        if id in self.cart:
+            del self.cart[id]
+            self.session.modified = True
+
