@@ -88,12 +88,14 @@ class CheckOtp(View):
             return render(request, "account/checkcode.html", {"form": form})
 
 
-class AaaAddressView(View):
+class AddAddressView(View):
     def post(self, request):
         form = AddressCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return render(request, "account/add_address.html", {"form": form})
+            address=form.save(commit=False)
+            address.user= request.user
+            address.save()
+        return render(request, "account/add_address.html", {"form": form})
 
     def get(self, request):
         form = AddressCreationForm()

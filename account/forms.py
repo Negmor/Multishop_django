@@ -35,14 +35,12 @@ class ContactForm(forms.Form):
         return data
 
 
-
-
 class OtpLoginForm(forms.Form):
     phone = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
 
     def clean(self):
         cd = super().clean()
-        phone= str(cd["phone"])
+        phone = str(cd["phone"])
         print(len(phone))
         if len(phone) < 9:
             raise ValidationError('phone is short ')
@@ -53,6 +51,8 @@ class CheckOtpForm(forms.Form):
 
 
 class AddressCreationForm(forms.ModelForm):
+    user = forms.IntegerField(required=False)
+
     class Meta:
         model = Address
-        exclude = ('user',)
+        fields = "__all__"
