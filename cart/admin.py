@@ -15,3 +15,6 @@ class orderAdmin(admin.ModelAdmin):
     list_display = ("user","is_paid")
     inlines = (orderItem,)
     list_filter = ("is_paid",)
+
+
+admin.site.register(models.DiscountModel)

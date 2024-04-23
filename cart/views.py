@@ -4,7 +4,7 @@ from .cart_module import Cart
 
 # Create your views here.
 from product.models import Product
-from .models import Order, OrderItem
+from .models import Order, OrderItem, DiscountModel
 
 
 class CartDtailView(View):
@@ -30,20 +30,39 @@ class CartDeleteView(View):
 
 
 class OrderDetailView(View):
-    def get(self,request,pk):
+    def get(self, request, pk):
         order = Order.objects.get(id=pk)
-        return render(request, "cart/order_detail.html",{"order":order})
+        return render(request, "cart/order_detail.html", {"order": order})
 
 
 class OrderCreationView(View):
     def get(self, request):
-        cart=Cart(request)
-        order=Order.objects.create(user=request.user,total=cart.total())
+        cart = Cart(request)
+        order = Order.objects.create(user=request.user, total=cart.total())
         for item in cart:
-            OrderItem.objects.create(order=order,product=item["product"],color=item["color"],size=item["size"]
-                                     ,quantity=item["quantity"],price=item["price"])
+            OrderItem.objects.create(order=order, product=item["product"], color=item["color"], size=item["size"]
+                                     , quantity=item["quantity"], price=item["price"])
 
         cart.remove_cart()
 
-        return redirect("cart:order_detail",order.id)
+        return redirect("cart:order_detail", order.id)
+
+
+class ApplyDiscountView(View):
+    def post(self, request, pk):
+        code = request.POST.get("discount_code")
+        order = Order.objects.get(id=pk)
+        discount_code = DiscountModel.objects.get(name=code)
+        print(discount_code)
+
+        if discount_code.quantity == 0:
+            return redirect("cart:order_detail", order.id,{"error":"this code expied"})
+        else:
+            order.total -= discount_code.percent/100 * order.total
+            order.save()
+            discount_code.quantity-=1
+            discount_code.save()
+        return redirect("cart:order_detail", order.id)
+
+
 

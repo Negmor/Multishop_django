@@ -8,7 +8,7 @@ from product.models import Product
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     created_at = models.DateTimeField(auto_now_add=True)
-    total=models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
     is_paid = models.BooleanField(default=False)
 
     def __str__(self):
@@ -24,3 +24,10 @@ class OrderItem(models.Model):
     price = models.PositiveIntegerField()
 
 
+class DiscountModel(models.Model):
+    name = models.CharField(max_length=10,unique=True)
+    percent = models.SmallIntegerField()
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.name
