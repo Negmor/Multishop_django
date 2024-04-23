@@ -42,5 +42,8 @@ class OrderCreationView(View):
         for item in cart:
             OrderItem.objects.create(order=order,product=item["product"],color=item["color"],size=item["size"]
                                      ,quantity=item["quantity"],price=item["price"])
+
+        cart.remove_cart()
+
         return redirect("cart:order_detail",order.id)
 
