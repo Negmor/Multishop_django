@@ -8,6 +8,7 @@ from product.models import Product
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
     created_at = models.DateTimeField(auto_now_add=True)
+    total=models.IntegerField(default=0)
     is_paid = models.BooleanField(default=False)
 
     def __str__(self):

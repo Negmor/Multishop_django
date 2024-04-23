@@ -38,3 +38,12 @@ class Cart:
             del self.cart[id]
             self.session.modified = True
 
+    def total(self):
+        cart= self.cart.values()
+        total=0
+        for item in cart:
+            total += int(item["price"]) * int(item['quantity'])
+        return total
+
+
+

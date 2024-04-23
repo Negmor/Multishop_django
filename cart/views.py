@@ -4,6 +4,7 @@ from .cart_module import Cart
 
 # Create your views here.
 from product.models import Product
+from .models import Order, OrderItem
 
 
 class CartDtailView(View):
@@ -26,3 +27,20 @@ class CartDeleteView(View):
         cart = Cart(request)
         cart.delete(id)
         return redirect("cart:cart_detail")
+
+
+class OrderDetailView(View):
+    def get(self,request,pk):
+        order = Order.objects.get(id=pk)
+        return render(request, "cart/order_detail.html",{"order":order})
+
+
+class OrderCreationView(View):
+    def get(self, request):
+        cart=Cart(request)
+        order=Order.objects.create(user=request.user,total=cart.total())
+        for item in cart:
+            OrderItem.objects.create(order=order,product=item["product"],color=item["color"],size=item["size"]
+                                     ,quantity=item["quantity"],price=item["price"])
+        return redirect("cart:order_detail",order.id)
+

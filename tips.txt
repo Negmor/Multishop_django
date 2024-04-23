@@ -11,12 +11,12 @@ https://www.geeksforgeeks.org/python-form-validation-using-django/
 v_148=validation error for form totally
 {% for error in form.non_field_errors%} in html for show it
 also you can write custom validator
-v_149=sms for rejister
-v_150=rejister with number,senario
-v_151=rejister with number (  code )
-v_152=rejister with number (  code ) --> import tip return redirect(reverse("account:user_checkcode")+ f'?phone={cd["phone"]}')
-v_153=user hide phone rejister with ####uniqe token###
-v_154=user hide phone rejister (uuid random token with time)( if user existed use User.objects.get_or_create)
+v_149=sms for register
+v_150=register with number,senario
+v_151=register with number (  code )
+v_152=register with number (  code ) --> import tip return redirect(reverse("account:user_checkcode")+ f'?phone={cd["phone"]}')
+v_153=user hide phone register with ####uniqe token###
+v_154=user hide phone register (uuid random token with time)( if user existed use User.objects.get_or_create)
 v_155=information about Meta class
 v_156=email rejister ""https://docs.djangoproject.com/en/5.0/topics/auth/customizing/""
 login with phone and email at the same time
@@ -36,3 +36,4 @@ v_170=cart_delete product
 v_171=check out _model _ admin panel __important
 v_172=check out _model
 v_173=add address
+v_174=pay_total , pay page
