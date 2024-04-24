@@ -39,3 +39,4 @@ v_173=add address
 v_174=pay_total , pay page
 v_175=remove basket iteam ,pay ,TIP(***NEXT PAGE**)
 v_176=offer code
+v_177,v_178=papal__zarin pal django search (code is not complate)

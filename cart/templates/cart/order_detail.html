@@ -53,12 +53,11 @@
                             <h5>Total</h5>
                             <h5>${{ order.total }}</h5>
                         </div>
-                        {% if request.user.addresses.all %}
-                        <a href="{% url "cart:order_creation" %}" class="btn btn-block btn-success font-weight-bold my-3 py-3">Pay</a>
-                        {% endif %}
+
                     </div>
                 </div>
              {% if request.user.addresses.all %}
+                 <form method="post" href="{% url "send request in zarinpal " %}">
                 <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown button
@@ -70,8 +69,12 @@
                               {% endfor %}
                       </div>
                 </div>
-                 <a href="{% url "account:add_address"%}?next={% url "cart:order_detail" order.id %}"
+                 <a  href="{% url "account:add_address"%}?next={% url "cart:order_detail" order.id %}"
                            class="btn btn-block btn-primary font-weight-bold my-3 py-3">Add new address</a>
+
+                     <button type="submit"  class="btn btn-block btn-success font-weight-bold my-3 py-3">Pay</button>
+
+                 </form>
             {% else %}
                  <a href="{% url "account:add_address"%}?next={% url "cart:order_detail" order.id %}"
                            class="btn btn-block btn-primary font-weight-bold my-3 py-3">Add address</a>
