@@ -40,4 +40,7 @@ v_174=pay_total , pay page
 v_175=remove basket iteam ,pay ,TIP(***NEXT PAGE**)
 v_176=offer code
 v_177,v_178=papal__zarin pal django search (code is not complate)
-179=visibility of page for user(from django.contrib.auth.mixins import LoginRequiredMixin),next
+v_179=visibility of page for user(from django.contrib.auth.mixins import LoginRequiredMixin),next
+v_180=django caching-->redis,  make project faster
+v_181=django caching--> use redis  : https://docs.djangoproject.com/en/5.0/topics/cache/
+
