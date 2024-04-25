@@ -5,6 +5,7 @@ from .cart_module import Cart
 # Create your views here.
 from product.models import Product
 from .models import Order, OrderItem, DiscountModel
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CartDtailView(View):
@@ -29,13 +30,13 @@ class CartDeleteView(View):
         return redirect("cart:cart_detail")
 
 
-class OrderDetailView(View):
+class OrderDetailView(LoginRequiredMixin,View):
     def get(self, request, pk):
         order = Order.objects.get(id=pk)
         return render(request, "cart/order_detail.html", {"order": order})
 
 
-class OrderCreationView(View):
+class OrderCreationView(LoginRequiredMixin,View):
     def get(self, request):
         cart = Cart(request)
         order = Order.objects.create(user=request.user, total=cart.total())
@@ -48,7 +49,7 @@ class OrderCreationView(View):
         return redirect("cart:order_detail", order.id)
 
 
-class ApplyDiscountView(View):
+class ApplyDiscountView(LoginRequiredMixin,View):
     def post(self, request, pk):
         code = request.POST.get("discount_code")
         order = Order.objects.get(id=pk)
@@ -56,13 +57,10 @@ class ApplyDiscountView(View):
         print(discount_code)
 
         if discount_code.quantity == 0:
-            return redirect("cart:order_detail", order.id,{"error":"this code expied"})
+            return redirect("cart:order_detail", order.id, {"error": "this code expied"})
         else:
-            order.total -= discount_code.percent/100 * order.total
+            order.total -= discount_code.percent / 100 * order.total
             order.save()
-            discount_code.quantity-=1
+            discount_code.quantity -= 1
             discount_code.save()
         return redirect("cart:order_detail", order.id)
-
-
-
