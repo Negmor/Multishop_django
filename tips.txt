@@ -41,6 +41,8 @@ v_175=remove basket iteam ,pay ,TIP(***NEXT PAGE**)
 v_176=offer code
 v_177,v_178=papal__zarin pal django search (code is not complate)
 v_179=visibility of page for user(from django.contrib.auth.mixins import LoginRequiredMixin),next
-v_180=django caching-->redis,  make project faster
-v_181=django caching--> use redis  : https://docs.djangoproject.com/en/5.0/topics/cache/
-
+v_180=django caching-->load page faster,redis,  make project faster
+v_181=django caching--> use redis ,all view cashing : https://docs.djangoproject.com/en/5.0/topics/cache/
+v_182=django caching ___> just part of project , in template { % load caching     % } , {% cache second name %}
+{%  end caching   %}
+sleep data in view we can use sleep()  , from time import sleep
