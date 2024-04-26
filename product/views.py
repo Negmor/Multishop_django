@@ -18,3 +18,11 @@ class NavbarPartialView(TemplateView):
         context = super(NavbarPartialView, self).get_context_data()
         context["categories"] = Category.objects.all()
         return context
+
+class CategoryStyle(TemplateView):
+    template_name = "category.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryStyle, self).get_context_data()
+        context["categories"] = Category.objects.all()
+        return context
