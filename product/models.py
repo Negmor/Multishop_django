@@ -18,7 +18,17 @@ class Color(models.Model):
         return self.title
 
 
+class Category(models.Model):
+    parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.CASCADE, related_name="subs")
+    title = models.CharField(max_length=100)
+    slug = models.SlugField()
+
+    def __str__(self):
+        return self.title
+
+
 class Product(models.Model):
+    category = models.ManyToManyField(Category,blank=True,null=True)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     price = models.IntegerField()
@@ -33,7 +43,7 @@ class Product(models.Model):
 
 class Information(models.Model):
     text = models.TextField()
-    product = models.ForeignKey(Product,null=True, on_delete=models.CASCADE, related_name="informations")
+    product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE, related_name="informations")
 
     def __str__(self):
         return self.text[:30]

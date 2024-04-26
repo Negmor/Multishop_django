@@ -46,3 +46,4 @@ v_181=django caching--> use redis ,all view cashing : https://docs.djangoproject
 v_182=django caching ___> just part of project , in template { % load caching     % } , {% cache second name %}
 {%  end caching   %}
 sleep data in view we can use sleep()  , from time import sleep
+v_183=instead categoris
