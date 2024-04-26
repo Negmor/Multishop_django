@@ -26,3 +26,8 @@ class CategoryStyle(TemplateView):
         context = super(CategoryStyle, self).get_context_data()
         context["categories"] = Category.objects.all()
         return context
+
+
+class ProductListview(TemplateView):
+    template_name = "product/product_list.html"
+

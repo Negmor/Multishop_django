@@ -8,5 +8,6 @@ urlpatterns = [
 
   path("<int:pk>",views.ProductDetailView.as_view(),name="product_dtail"),
   path("navbar",views.NavbarPartialView.as_view(),name="navbar"),
-  path("category",views.CategoryStyle.as_view(),name="category")
+  path("category",views.CategoryStyle.as_view(),name="category"),
+  path("list",views.ProductListview.as_view(),name="product_list"),
 ]
